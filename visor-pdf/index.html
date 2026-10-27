@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visor de documento</title>
+<style>
+  body { margin: 8px; font-family: "Times New Roman", serif; font-size: 16px; }
+  fieldset { margin: 0; padding: 0.35em 0.75em 0.625em; border: 1px solid #c0c0c0; }
+  #viewer { width: 100%; height: 85vh; border: 0; display: block; }
+</style>
+</head>
+<body>
+<fieldset id="box" hidden>
+  <legend>Documento Encontrado</legend>
+  Si no puede visualizar el documento, por favor descargue <a id="dl" href="#" download>aquí</a>.
+  <embed id="viewer" type="application/pdf">
+</fieldset>
+<p id="msg" hidden>Documento no encontrado.</p>
+<script>
+  // Uso: index.html?doc=archivo.pdf  (el archivo debe estar en /docs)
+  const name = new URLSearchParams(location.search).get('doc');
+  if (name && /^[\w.\- ]+\.pdf$/i.test(name) && !name.includes('..')) {
+    const path = 'docs/' + encodeURIComponent(name);
+    fetch(path, { method: 'HEAD' }).then(r => {
+      if (!r.ok) throw 0;
+      document.getElementById('dl').href = path;
+      document.getElementById('viewer').src = path;
+      document.getElementById('box').hidden = false;
+    }).catch(() => document.getElementById('msg').hidden = false);
+  } else {
+    document.getElementById('msg').hidden = false;
+  }
+</script>
+</body>
+</html>
