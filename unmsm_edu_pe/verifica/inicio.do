@@ -153,9 +153,18 @@
                     <select id="tipoDocumento" required>
                         <option value="">[SELECCIONAR]</option>
                         <!-- Agrega aquí los nombres de los documentos que se plasmarán -->
-                        <option value="certificado">Certificado</option>
-                        <option value="acta">Acta</option>
-                        <option value="resolucion">Resolución</option>
+                        <option value="acta">ACTA</option>
+                        <option value="acta">ACTA SUSTENTACIÓN DE TESIS</option>
+                        <option value="resolucion">CARTA</option>
+                        <option value="resolucion">CARTA DE PRESENTACIÓN</option>
+                        <option value="certificado">CONSTANCIA DE ESTUDIOS</option>
+                        <option value="certificado">CONSTANCIA DE EGRESADO</option>
+                        <option value="certificado">CERTIFICADO</option>
+                        <option value="resolucion">CERTIFICADO ACADEMICO</option>
+                        <option value="resolucion">CERTIFICADO DE ESTUDIOS</option>
+                        <option value="resolucion">CERTIFICADO DE TRABAJO</option>
+                        <option value="resolucion">CONFORMIDAD DE LABORES</option>
+                        <option value="resolucion">CONFORMIDAD DE INFORMES</option>
                         <option value="titulo">Título</option>
                         <option value="otro">Otro Documento</option>
                     </select>
