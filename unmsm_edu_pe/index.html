@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documento</title>
+<style>
+  body{margin:8px;font-family:"Times New Roman",serif;font-size:16px}
+  fieldset{margin:0;padding:.35em .75em .625em;border:1px solid #c0c0c0}
+  #viewer{width:100%;height:85vh;border:0;display:block}
+</style>
+</head>
+<body>
+<fieldset id="box" hidden>
+  <legend>Documento Encontrado</legend>
+  Si no puede visualizar el documento, por favor descargue <a id="dl" href="#" download>aquí</a>.
+  <embed id="viewer" type="application/pdf">
+</fieldset>
+<p id="msg" hidden>Documento no encontrado.</p>
+<script>
+(function(){
+"use strict";
+// --- bloqueos basicos (disuasorios, no seguridad real) ---
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase();
+  if(k==='f12'||(e.ctrlKey&&e.shiftKey&&['i','j','c'].includes(k))||(e.ctrlKey&&k==='u')){
+    e.preventDefault();
+  }
+});
+(function loop(){
+  const t0=performance.now();
+  debugger;
+  const t1=performance.now();
+  if(t1-t0>100){document.body.innerHTML='<p>Acceso restringido.</p>';return;}
+  setTimeout(loop,1000);
+})();
+
+// --- carga del documento (codificada en base64, decodificada en runtime) ---
+const b64='CmNvbnN0IG5hbWUgPSBuZXcgVVJMU2VhcmNoUGFyYW1zKGxvY2F0aW9uLnNlYXJjaCkuZ2V0KCdkb2MnKTsKaWYgKG5hbWUgJiYgL15bXHcuXC1dKy5wZGYkL2kudGVzdChuYW1lKSkgewogIGNvbnN0IHBhdGggPSAnYTlmMy8nICsgZW5jb2RlVVJJQ29tcG9uZW50KG5hbWUpOwogIGZldGNoKHBhdGgsIHsgbWV0aG9kOiAnSEVBRCcgfSkudGhlbihyID0+IHsKICAgIGlmICghci5vaykgdGhyb3cgMDsKICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdkbCcpLmhyZWYgPSBwYXRoOwogICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3ZpZXdlcicpLnNyYyA9IHBhdGg7CiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnYm94JykuaGlkZGVuID0gZmFsc2U7CiAgfSkuY2F0Y2goKCkgPT4gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ21zZycpLmhpZGRlbiA9IGZhbHNlKTsKfSBlbHNlIHsKICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbXNnJykuaGlkZGVuID0gZmFsc2U7Cn0K';
+eval(atob(b64));
+})();
+</script>
+</body>
+</html>
